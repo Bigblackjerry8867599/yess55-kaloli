@@ -1,1 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPTOPIA | Community-Driven Experiences</title>
+    <meta name="description" content="UPTOPIA offers curated hospitality experiences that connect passionate hosts with community-minded attendees.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <style>
+        :root {
+            --primary: #3e362e;
+            --dark: #1a1a1a;
+            --light: #000000;
+            --accent: #ffd166;
+            --brand-blue: rgb(3, 3, 94);
+            --card-bg: #1a1a1a;
+            --border: #333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a { color: inherit; }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* ===== NAVBAR ===== */
+        #navbar {
+            position: sticky;
+            top: 0;
+            background: var(--light);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 0;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+        }
+        .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .brand:hover { color: var(--accent); }
+        #nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            align-items: center;
+        }
+        #nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+        #nav-links a:hover { color: var(--accent); }
+        #nav-links .signup {
+            background: var(--accent);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #nav-links .signup:hover { color: #000; opacity: 0.9; }
+
+        #menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #fff;
+            font-size: 1.25rem;
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(180deg, var(--brand-blue) 0%, #0a0a2a 100%);
+            padding: 40px 1rem 60px;
+        }
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 70vh;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .hero-column {
+            flex: 1 1 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-column:nth-child(1) {
+            max-width: 600px;
+        }
+        .hero-tag {
+            color: #fff;
+            background-color: var(--brand-blue);
+            padding: 8px 18px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: bold;
+        }
+        .hero-paragraph {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            color: rgba(255,255,255,0.85);
+            max-width: 500px;
+        }
+        .order-button {
+            background-color: var(--accent);
+            color: #000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .order-button:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .hero-column:nth-child(2) {
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            position: relative;
+        }
+        .hero-image-wrap {
+            position: relative;
+            display: block;
+            width: min(480px, 85vw);
+            height: min(480px, 85vw);
+        }
+        .hero-btns { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+        .btn { border-radius: 30px; padding: 12px 28px; font-weight: 500; }
+
+        /* ===== THREE.JS TRIANGLE SIGN ===== */
+        #sign-container {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+        #sign-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* ===== SHARED SECTIONS ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        section { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--accent); }
+
+        /* ===== CLIENTS ===== */
+        .clients { background: var(--light); padding: 60px 0; }
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        .client-logo {
+            height: 50px;
+            opacity: 0.75;
+            filter: grayscale(1) invert(1);
+            transition: opacity 0.3s, filter 0.3s;
+            max-width: 160px;
+            object-fit: contain;
+        }
+        .client-logo:hover { opacity: 1; filter: none; }
+
+        /* ===== WHAT WE DO ===== */
+        .what-we-do { background: var(--dark); }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .service-icon {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+            background: rgba(255,209,102,0.08);
+        }
+        .service-content { padding: 30px; }
+        .service-content h3 { color: #fff; margin-bottom: 10px; font-size: 1.35rem; }
+        .service-content p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works { background: var(--light); }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .step-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .step-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
+        .step-card p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+
+        /* ===== WHY US ===== */
+        .why-us { background: var(--dark); }
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        .advantage-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .advantage-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .advantage-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.15rem; }
+        .advantage-card p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+
+        /* ===== CTA ===== */
+        .cta {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, #0a0a2a 100%);
+            text-align: center;
+        }
+        .cta h2 {
+            font-size: clamp(1.6rem, 4vw, 2.3rem);
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .cta p {
+            max-width: 640px;
+            margin: 0 auto 30px;
+            color: rgba(255,255,255,0.85);
+        }
+        .cta-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btns .btn-light {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+        .cta-btns .btn-light:hover { background: #ffdb8a; color: #000; }
+        .cta-btns .btn-outline-light {
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .cta-btns .btn-outline-light:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid var(--border);
+            padding: 50px 1rem 30px;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .footer-column p,
+        .footer-column li {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-column a:hover { color: var(--accent); }
+        .footer-column i { color: var(--accent); margin-right: 8px; }
+        .copyright {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* ===== MOBILE (dropdown) ===== */
+        @media (max-width: 900px) {
+            #menu-toggle { display: block; }
+            #nav-links {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                right: 0;
+                left: auto;
+                width: 25vw;
+                min-width: 160px;
+                flex-direction: column;
+                background: #000000;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 0.8rem 0.8rem;
+                gap: 0.5rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+                z-index: 999;
+            }
+            #nav-links.open { display: flex; }
+            #nav-links li { width: 100%; }
+            #nav-links a {
+                display: block;
+                padding: 0.5rem 0.5rem;
+                border-radius: 6px;
+                color: #fff;
+                font-size: 0.9rem;
+            }
+            #nav-links a:hover { background: rgba(255,255,255,0.08); }
+            #nav-links .signup { text-align: center; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 55px 0; }
+            .hero { padding: 30px 1rem 50px; }
+            .hero-container {
+                flex-direction: column-reverse;
+                min-height: auto;
+                gap: 1.5rem;
+            }
+            .hero-column {
+                flex: 1 1 100%;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+            .hero-paragraph { margin-left: auto; margin-right: auto; }
+            .hero-btns { justify-content: center; }
+            .hero-image-wrap {
+                width: min(340px, 80vw);
+                height: min(340px, 80vw);
+            }
+            .client-logos { gap: 25px; }
+            .client-logo { height: 40px; }
+            .footer-grid { text-align: center; }
+        }
+
+        /* For very narrow screens, ensure dropdown stays readable */
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.9rem; }
+            .hero-btns { flex-direction: column; width: 100%; }
+            .hero-btns .btn,
+            .order-button { width: 100%; text-align: center; }
+            .cta-btns { flex-direction: column; }
+            .cta-btns .btn { width: 100%; }
+            #nav-links {
+                width: 25vw;
+                min-width: 140px;
+                padding: 0.6rem 0.5rem;
+            }
+            #nav-links a { font-size: 0.8rem; padding: 0.4rem 0.4rem; }
+        }
+
+        /* Accessibility: reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="brand" aria-label="UPTOPIA home">
+                <i class="fas fa-utensils" aria-hidden="true"></i> UPTOPIA
+            </a>
+
+            <button id="menu-toggle"
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-controls="nav-links"
+                    aria-expanded="false">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <ul id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="signup.html" class="signup">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-column">
+                <span class="hero-tag">Community-Driven Experiences</span>
+                <h1 class="hero-title">Connect Through Shared Experiences</h1>
+                <p class="hero-paragraph">
+                    UPTOPIA brings passionate hosts and community-minded attendees together
+                    through curated hospitality experiences — from cooking classes to nature
+                    hikes and intimate gatherings.
+                </p>
+                <a href="case-studies.html" class="order-button">Explore Experiences</a>
+                <div class="hero-btns">
+                    <a href="solutions.html" class="btn btn-outline-light">Become a Host</a>
+                </div>
+            </div>
+            <div class="hero-column">
+                <div class="hero-image-wrap">
+                    <!-- Three.js triangular marble sign with triangle-masked images -->
+                    <div id="sign-container" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED IN ===== -->
+    <section class="clients">
+        <div class="container">
+            <div class="section-title"><h2>Featured In</h2></div>
+            <div class="client-logos">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_News_logo.png/800px-Google_News_logo.png"
+                     class="client-logo" alt="Google News">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/TechCrunch_logo.svg/1280px-TechCrunch_logo.svg.png"
+                     class="client-logo" alt="TechCrunch">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Forbes_logo.svg/2560px-Forbes_logo.svg.png"
+                     class="client-logo" alt="Forbes">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT WE OFFER ===== -->
+    <section class="what-we-do">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calendar-check" aria-hidden="true"></i></div>
+                    <div class="service-content">
+                        <h3>Curated Experiences</h3>
+                        <p>We carefully select and vet hosts to ensure high-quality, memorable experiences that bring people together in meaningful ways.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+                    <div class="service-content">
+                        <h3>Community Building</h3>
+                        <p>Our algorithm connects like-minded individuals to foster genuine relationships and build vibrant local communities.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+                    <div class="service-content">
+                        <h3>Secure Platform</h3>
+                        <p>We provide a safe, reliable platform for hosts and attendees with secure payments and verified profiles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+            </div>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Discover Experiences</h3>
+                    <p>Browse our curated selection of gatherings in your area — from cooking classes to nature hikes and game nights.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Book Your Spot</h3>
+                    <p>Reserve your place with our secure booking system. Receive all details and preparation instructions.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Connect &amp; Enjoy</h3>
+                    <p>Attend the event, meet like-minded people, and create meaningful connections in a welcoming environment.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Become a Host</h3>
+                    <p>Share your passion! Apply to host your own events and build your community following.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY US ===== -->
+    <section class="why-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose UPTOPIA</h2>
+            </div>
+            <div class="advantages">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-heart" aria-hidden="true"></i></div>
+                    <h3>Authentic Connections</h3>
+                    <p>Our matching algorithm ensures you meet people who share your interests and values.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-star" aria-hidden="true"></i></div>
+                    <h3>Quality Experiences</h3>
+                    <p>Every host is vetted to ensure exceptional, memorable gatherings.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-lock" aria-hidden="true"></i></div>
+                    <h3>Safe &amp; Secure</h3>
+                    <p>Verified profiles and secure payments give you peace of mind.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+                    <h3>Community Focus</h3>
+                    <p>We're building networks that extend beyond single events.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Join Our Community?</h2>
+            <p>Discover unique experiences in your area or start hosting your own gatherings. Join thousands of community builders on UPTOPIA.</p>
+            <div class="cta-btns">
+                <a href="case-studies.html" class="btn btn-light">Find Experiences</a>
+                <a href="solutions.html" class="btn btn-outline-light">Become a Host</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>UPTOPIA Solutions</h3>
+                <p>Creating innovative solutions that bridge communities and technology for sustainable impact.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Values</h3>
+                <ul>
+                    <li>Teamwork</li>
+                    <li>Innovation</li>
+                    <li>Reliability</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="case-studies.html">Case Studies</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="legal.html#privacy">Privacy Policy</a></li>
+                    <li><a href="legal.html#terms">Terms of Service</a></li>
+                    <li><a href="legal.html#cookie">Cookie Policy</a></li>
+                    <li><a href="legal.html#accessibility">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Remote Worldwide</li>
+                    <li><i class="fas fa-phone" aria-hidden="true"></i> Coming Soon</li>
+                    <li><i class="fas fa-envelope" aria-hidden="true"></i> apacheremembers982@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; <span id="year"></span> UPTOPIA Solutions. All rights reserved.</p>
+            <p>A hospitality and digital services company</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const navLinks = document.getElementById('nav-links');
+            const menuToggle = document.getElementById('menu-toggle');
+
+            // ---- Mobile menu toggle ----
+            function setMenu(open) {
+                navLinks.classList.toggle('open', open);
+                menuToggle.setAttribute('aria-expanded', String(open));
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+                }
+            }
+
+            menuToggle.addEventListener('click', function () {
+                const isOpen = navLinks.classList.contains('open');
+                setMenu(!isOpen);
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => setMenu(false));
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!navLinks.classList.contains('open')) return;
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    setMenu(false);
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                    setMenu(false);
+                    menuToggle.focus();
+                }
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (!prefersReduced && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.service-card, .step-card, .advantage-card')
+                    .forEach(card => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                        observer.observe(card);
+                    });
+            }
+        })();
+    </script>
+
+    <!-- ===== THREE.JS TRIANGLE SIGN ===== -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+    </script>
+    <script type="module">
+    import * as THREE from 'three';
+
+    /* ============================================================
+       ⚙️  CONFIGURATION
+       ============================================================ */
+    const SIGN_CONFIG = {
+      // Front face image (dinner meeting)
+      frontImage: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80',
+
+      // Back face image (two girls smiling)
+      backImage: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+
+      // Marble tone: 'light' (white Carrara) or 'dark' (black marble)
+      marbleTone: 'light',
+
+      // Marble vein intensity (0.0 - 1.0)
+      marbleVeins: 0.55,
+
+      // Spin speed in radians per second (~10s per full rotation at 0.6)
+      spinSpeed: 0.5,
+
+      // Overall scale
+      size: 1.25
+    };
+    /* ============================================================ */
+
+    (function initTriangleSign() {
+      const container = document.getElementById('sign-container');
+      if (!container) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // --- Renderer ---
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+
+      // --- Scene & camera ---
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        35,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 6);
+      camera.lookAt(0, 0, 0);
+
+      // --- Lights ---
+      scene.add(new THREE.AmbientLight(0xffffff, 0.95));
+
+      const key = new THREE.DirectionalLight(0xffffff, 1.3);
+      key.position.set(3, 4, 5);
+      scene.add(key);
+
+      const fill = new THREE.DirectionalLight(0xccccff, 0.5);
+      fill.position.set(-4, -2, 3);
+      scene.add(fill);
+
+      const rim = new THREE.DirectionalLight(0xfff0d0, 0.5);
+      rim.position.set(0, 0, -5);
+      scene.add(rim);
+
+      // --- Group to hold everything ---
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // --- Dimensions ---
+      const radius = 1.6 * SIGN_CONFIG.size;
+      const depth  = 0.35 * SIGN_CONFIG.size;
+
+      // --- Marble body ---
+      const marbleTexture = makeMarbleTexture(SIGN_CONFIG.marbleTone, SIGN_CONFIG.marbleVeins);
+      marbleTexture.wrapS = THREE.RepeatWrapping;
+      marbleTexture.wrapT = THREE.RepeatWrapping;
+      marbleTexture.repeat.set(2, 2);
+
+      // Triangular prism. CylinderGeometry with 3 radial segments = triangular prism.
+      const bodyGeo = new THREE.CylinderGeometry(radius, radius, depth, 3, 1);
+      bodyGeo.rotateX(Math.PI / 2);   // upright, faces toward camera
+      bodyGeo.rotateY(Math.PI / 6);   // align a flat face forward
+
+      const bodyMat = new THREE.MeshStandardMaterial({
+        map: marbleTexture,
+        color: 0xffffff,
+        metalness: 0.1,
+        roughness: 0.65,
+        flatShading: false
+      });
+      const body = new THREE.Mesh(bodyGeo, bodyMat);
+      group.add(body);
+
+      // --- Triangle-masked image planes on front and back ---
+      // We create a plane the same size as the triangle's bounding area,
+      // with a texture that's already clipped to a triangle shape.
+      const planeW = radius * Math.sqrt(3);   // width of equilateral triangle
+      const planeH = radius * 1.5;             // height of equilateral triangle
+
+      loadAndApplyImage(SIGN_CONFIG.frontImage, 0, +1);
+      loadAndApplyImage(SIGN_CONFIG.backImage,  Math.PI, -1);
+
+      function loadAndApplyImage(url, rotationY, normalDir) {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          const texture = makeTriangleMaskedTexture(img);
+          const mat = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            depthWrite: false,
+            side: THREE.FrontSide
+          });
+          const planeGeo = new THREE.PlaneGeometry(planeW, planeH);
+          const plane = new THREE.Mesh(planeGeo, mat);
+
+          // Offset just outside the prism face along its normal
+          const offset = depth / 2 + 0.002;
+          plane.position.set(
+            Math.sin(rotationY) * offset,
+            0,
+            Math.cos(rotationY) * offset
+          );
+          plane.rotation.y = rotationY;
+
+          // Back face needs to face the opposite direction
+          if (normalDir === -1) {
+            plane.rotation.y = rotationY + Math.PI;
+            plane.position.set(
+              Math.sin(rotationY + Math.PI) * offset,
+              0,
+              Math.cos(rotationY + Math.PI) * offset
+            );
+          }
+
+          group.add(plane);
+        };
+        img.onerror = () => {
+          console.warn('Failed to load sign image:', url);
+        };
+        img.src = url;
+      }
+
+      // --- Triangle-masked texture generator ---
+      // Draws the image to a canvas, then clips it to an upward-pointing
+      // equilateral triangle so it fits the prism face exactly.
+      function makeTriangleMaskedTexture(img) {
+        const size = 1024;
+        const c = document.createElement('canvas');
+        c.width = size;
+        c.height = size;
+        const ctx = c.getContext('2d');
+
+        ctx.clearRect(0, 0, size, size);
+
+        // Triangle path: pointing up, matching PlaneGeometry aspect (W x H)
+        // Plane is planeW wide by planeH tall. Triangle vertices:
+        //   top-center, bottom-left, bottom-right
+        const pad = 4; // tiny bleed prevention
+        ctx.beginPath();
+        ctx.moveTo(size / 2, pad);
+        ctx.lineTo(size - pad, size - pad);
+        ctx.lineTo(pad, size - pad);
+        ctx.closePath();
+        ctx.clip();
+
+        // Draw the image "cover"-fitted inside the triangle bounds
+        const imgAspect = img.width / img.height;
+        const boxAspect = size / size; // square canvas
+
+        let drawW, drawH, drawX, drawY;
+        if (imgAspect > boxAspect) {
+          drawH = size;
+          drawW = size * imgAspect;
+          drawX = (size - drawW) / 2;
+          drawY = 0;
+        } else {
+          drawW = size;
+          drawH = size / imgAspect;
+          drawX = 0;
+          drawY = (size - drawH) / 2;
+        }
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+        const tex = new THREE.CanvasTexture(c);
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        tex.colorSpace = THREE.SRGBColorSpace;
+        return tex;
+      }
+
+      // --- Procedural marble texture ---
+      function makeMarbleTexture(tone, veinStrength) {
+        const size = 1024;
+        const c = document.createElement('canvas');
+        c.width = size;
+        c.height = size;
+        const ctx = c.getContext('2d');
+
+        const isLight = tone === 'light';
+        const baseColor = isLight ? '#f2efe9' : '#2a2a2e';
+        const veinColor = isLight ? 'rgba(120,120,140,0.75)' : 'rgba(220,210,190,0.55)';
+        const secondaryVein = isLight ? 'rgba(160,160,175,0.4)' : 'rgba(180,170,150,0.3)';
+
+        // Base
+        ctx.fillStyle = baseColor;
+        ctx.fillRect(0, 0, size, size);
+
+        // Soft clouds of subtle tone variation
+        for (let i = 0; i < 24; i++) {
+          const x = Math.random() * size;
+          const y = Math.random() * size;
+          const r = 120 + Math.random() * 260;
+          const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+          const shade = isLight
+            ? `rgba(200,195,185,${0.08 + Math.random() * 0.08})`
+            : `rgba(60,60,70,${0.10 + Math.random() * 0.10})`;
+          grad.addColorStop(0, shade);
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Primary veins — flowing curves across the surface
+        const veinCount = 10;
+        for (let v = 0; v < veinCount; v++) {
+          drawVein(ctx, size, veinColor, veinStrength, 2 + Math.random() * 3);
+        }
+        // Secondary finer veins
+        for (let v = 0; v < 8; v++) {
+          drawVein(ctx, size, secondaryVein, veinStrength * 0.7, 1 + Math.random() * 1.5);
+        }
+
+        const tex = new THREE.CanvasTexture(c);
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        tex.colorSpace = THREE.SRGBColorSpace;
+        return tex;
+      }
+
+      function drawVein(ctx, size, color, strength, width) {
+        const startX = Math.random() * size;
+        const startY = Math.random() * size;
+        const angle = Math.random() * Math.PI * 2;
+        const length = size * (0.6 + Math.random() * 0.8);
+        const segments = 24;
+        const wobble = 60 + Math.random() * 120;
+
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.globalAlpha = strength;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+
+        let x = startX, y = startY;
+        let a = angle;
+        for (let i = 0; i < segments; i++) {
+          a += (Math.random() - 0.5) * 0.5;
+          const step = length / segments;
+          x += Math.cos(a) * step;
+          y += Math.sin(a) * step;
+          // Small perpendicular wobble for organic feel
+          const wob = (Math.random() - 0.5) * (wobble / segments);
+          ctx.lineTo(x + Math.cos(a + Math.PI / 2) * wob,
+                     y + Math.sin(a + Math.PI / 2) * wob);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // --- Responsive resize ---
+      function resize() {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // --- Animation loop ---
+      const clock = new THREE.Clock();
+      let rafId = null;
+
+      function animate() {
+        const dt = clock.getDelta();
+        if (!prefersReduced) {
+          group.rotation.y += SIGN_CONFIG.spinSpeed * dt;
+        }
+        renderer.render(scene, camera);
+        rafId = requestAnimationFrame(animate);
+      }
+      animate();
+
+      // --- Cleanup ---
+      window.addEventListener('beforeunload', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        scene.traverse(obj => {
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) {
+              obj.material.forEach(m => { m.map?.dispose(); m.dispose(); });
+            } else {
+              obj.material.map?.dispose();
+              obj.material.dispose();
+            }
+          }
+        });
+        renderer.dispose();
+      });
+
+      // --- Pause when tab hidden ---
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        } else if (!rafId) {
+          clock.getDelta();
+          animate();
+        }
+      });
+    })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNfQ=="
+        crossorigin="anonymous"></script>
+</body>
+  </html>
